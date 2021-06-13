@@ -1,4 +1,4 @@
-FROM ubuntu-latest
+FROM ubuntu
 
 COPY gg.sh /gg.sh
 
