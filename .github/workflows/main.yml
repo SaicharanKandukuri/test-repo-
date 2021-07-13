@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: setup deps
-      run: apt install axel -y
+      run: sudo apt install axel -y
     - name: clone fs
       run: axel https://cdimage.ubuntu.com/ubuntu/daily-live/current/impish-desktop-arm64.iso
     - name: upload artifact
