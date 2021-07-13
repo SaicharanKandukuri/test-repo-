@@ -23,9 +23,9 @@ jobs:
       run: sudo cp -v payload/stage1.sh fs/stage1.sh; sudo cp -v payload/stage2.sh fs/stage2.sh; sudo chroot fs bash {/stage1.sh,/stage2.sh}
     - name: make tarbal
       run: sudo chroot fs tar -cvpzf /focal-armhf.tar.gz --exclude-caches-all \
+              --exclude=/proc/* \
               --exclude=/dev/*  \
               --exclude=/sys/*  \
-              --exclude=/proc/* \
               --exclude=/run/*  \
               --exclude=/tmp/*  \
               --exclude=/focal-armhf.tar.gz /* --one-file-system 2>/dev/null || true && true
