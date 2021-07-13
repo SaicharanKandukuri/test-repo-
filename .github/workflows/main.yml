@@ -18,7 +18,7 @@ jobs:
     - name: mount fs
       run: sudo mount --rbind /dev fs/dev; sudo mount -t proc proc fs/proc;sudo mount -t sysfs /sys fs/sys
     - name: setup network
-      run: sudo touch fs/etc/resolv.conf; echo "nameserver 1.1.1.1" >> /etc/resolv.conf
+      run: sudo touch fs/etc/resolv.conf; echo "nameserver 1.1.1.1" >> fs/etc/resolv.conf
     - name: fix up fs
       run: sudo cp -v payload/stage1.sh fs/stage1.sh; sudo cp -v payload/stage2.sh fs/stage2.sh; sudo chroot fs bash {/stage1.sh,/stage2.sh}
     - name: make tarbal
