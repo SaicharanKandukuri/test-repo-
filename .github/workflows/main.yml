@@ -28,7 +28,7 @@ jobs:
               --exclude=/proc/* \
               --exclude=/run/*  \
               --exclude=/tmp/*  \
-              --exclude=/focal-armhf.tar.gz /* --one-file-system 2>/dev/null || exit 0 && exit 0
+              --exclude=/focal-armhf.tar.gz /* --one-file-system 2>/dev/null || true && true
     - name: upload artifact
       uses: actions/upload-artifact@v2
       with:
