@@ -1,5 +1,8 @@
-on: [push]
-
+on:
+  push:
+    paths:
+      - '/payload/*.sh'
+      - '.github/workflows/*.yaml'
 jobs:
   build:
 
