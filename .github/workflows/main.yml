@@ -20,7 +20,13 @@ jobs:
     - name: setup network
       run: sudo touch fs/etc/resolv.conf;echo nameserver 8.8.8.8 | sudo tee fs/etc/resolv.conf
     - name: fix up fs
-      run: sudo cp -v payload/stage1.sh fs/stage1.sh; sudo cp -v payload/stage2.sh fs/stage2.sh; sudo chroot fs bash {/stage1.sh,/stage2.sh}
+      run: sudo cp -v payload/stage1.sh fs/stage1.sh; sudo cp -v payload/stage2.sh fs/stage2.sh; sudo chroot fs bash /stage1.sh; sudo chroot fs bash /stage2.sh
+    - name: Desktop Environment xfce4/Xubuntu and essentials
+      run: sudo cp -v payload/stage3.sh fs/stage3.sh;sudo chroot fs bash /stage3.sh
+    - name: setupvnc
+      run: sudo cp -v payload/stage4.sh fs/stage4.sh;sudo chroot fs bash /stage4.sh
+    - name: cleanup
+      run: sudo chroot fs apt clean
     - name: make tarbal
       run: sudo chroot fs tar -cvpzf /focal-armhf.tar.gz --exclude-caches-all --exclude=/dev/*  --exclude=/sys/* --exclude=/proc/* --exclude=/run/* --exclude=/tmp/* --exclude=/focal-armhf.tar.gz /* --one-file-system || true
     - name: upload artifact
