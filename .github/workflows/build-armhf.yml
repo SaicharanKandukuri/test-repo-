@@ -31,10 +31,9 @@ jobs:
       run: sudo chroot fs tar -cvpzf /focal-armhf.tar.gz --exclude-caches-all --exclude=/dev/*  --exclude=/sys/* --exclude=/proc/* --exclude=/run/* --exclude=/tmp/* --exclude=/focal-armhf.tar.gz /* --one-file-system || true
     - name: upload artifact
       uses: actions/upload-artifact@v2
-    with:
-      name: focal-armhf.tar.gz
-      path : |
-        fs/focal-armhf.tar.gz
+      with:
+        name: focal-armhf.tar.gz
+        path : fs/focal-armhf.tar.gz
     - name: GitHub Upload Release Artifacts
       uses: Roang-zero1/github-upload-release-artifacts-action@v2.1.0
       env:
