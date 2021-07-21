@@ -35,34 +35,14 @@ jobs:
       name: focal-armhf.tar.gz
       path : |
         fs/focal-armhf.tar.gz
-    
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
+    - name: GitHub Upload Release Artifacts
+      uses: Roang-zero1/github-upload-release-artifacts-action@v2.1.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        GITHUB_TOKEN: ${{ secrets.GITHUB}}
+    -name: Create Git Release
+      uses: Roang-zero1/github-upload-release-artifacts-action@master
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Changes in this Release
-          - First Change
-          - Second Change
-        draft: true
-        prerelease: false
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: fs/focal-armhf.tar.gz
-        asset_name: focal-armhf.tar.gz
-        asset_content_type: application/gzip
-    - name: Publish release
-      uses: StuYarrow/publish-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        id: ${{ steps.create_release.outputs.id }}
-    
+        args:
+        - fs/focal-armhf.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
