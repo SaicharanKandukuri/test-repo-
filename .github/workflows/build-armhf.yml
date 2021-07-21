@@ -31,10 +31,11 @@ jobs:
       run: sudo chroot fs tar -cvpzf /focal-armhf.tar.gz --exclude-caches-all --exclude=/dev/*  --exclude=/sys/* --exclude=/proc/* --exclude=/run/* --exclude=/tmp/* --exclude=/focal-armhf.tar.gz /* --one-file-system || true
     - name: upload artifact
       uses: actions/upload-artifact@v2
-    with:
+      with:
       name: focal-armhf.tar.gz
       path : |
         fs/focal-armhf.tar.gz
+    
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
