@@ -38,10 +38,10 @@ jobs:
       uses: Roang-zero1/github-upload-release-artifacts-action@v2.1.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB}}
-    -name: Create Git Release
-      uses:Roang-zero1/github-upload-release-artifacts-action@master
-      with:|
-        args:|
+    - name: Create Git Release
+      uses: Roang-zero1/github-upload-release-artifacts-action@master
+      with:
+        args:
         - fs/focal-armhf.tar.gz
-        env:|
-          GITHUB_TOKEN:| ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
