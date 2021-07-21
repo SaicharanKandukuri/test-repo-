@@ -8,7 +8,7 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v2
     - name: setup deps
-      run: sudo appt update; sudo apt install axel binfmt-support qemu-user-static -y
+      run: sudo apt update; sudo apt install axel binfmt-support qemu-user-static -y
     - name: clone fs
       run: axel https://cdimage.ubuntu.com/ubuntu-base/focal/daily/current/focal-base-armhf.tar.gz
     - name: extract fs
