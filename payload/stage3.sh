@@ -1,9 +1,10 @@
 #!/usr/bin/bash
-
-DEPS="git xfce4 xubuntu-desktop curl tigervnc*"
+apt --yes --allow full-upgrade -y
+DEPS="git curl tigervnc*"
 ADEPS="imagemagick optipng inkscape"
-repos="WhiteSur-gtk-theme WhiteSur-icon-theme"
+repos="vinceliuice/WhiteSur-gtk-theme vinceliuice/WhiteSur-icon-theme"
 
+apt update
 apt install -y "$DEPS"
 apt install -y "$ADEPS"
 
@@ -12,7 +13,7 @@ if [ -d "/root" ]; then
 fi
 
 for item in $repos; do
-    git clone "${item}"
+    git clone "https://github.com/${item}"
     cd "${item}" || true
     bash install.sh
     cd ../ || true

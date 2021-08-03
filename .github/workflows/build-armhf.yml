@@ -10,11 +10,11 @@ jobs:
     - name: setup deps
       run: sudo apt update; sudo apt install axel binfmt-support qemu-user-static -y
     - name: clone fs
-      run: axel https://cdimage.ubuntu.com/ubuntu-base/focal/daily/current/focal-base-armhf.tar.gz
+      run: axel https://build.nethunter.com/kalifs/kalifs-latest/kalifs-arm64-full.tar.xz
     - name: extract fs
-      run: mkdir -pv fs; sudo tar -xvpzf focal-base-armhf.tar.gz -C fs
+      run: mkdir -pv fs; sudo tar -xvpf kalifs-arm64-full.tar.xz -C fs
     - name: Setup qemu
-      run: sudo cp /bin/qemu-arm-static fs/bin ;sudo service binfmt-support start
+      run: sudo cp /bin/qemu-aarch64-static fs/bin ;sudo service binfmt-support start
     - name: mount fs
       run: sudo mount --rbind /dev fs/dev; sudo mount -t proc proc fs/proc;sudo mount -t sysfs /sys fs/sys
     - name: setup network
