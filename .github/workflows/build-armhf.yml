@@ -18,7 +18,7 @@ jobs:
     - name: mount fs
       run: sudo mount --rbind /dev fs/kali-arm64/dev; sudo mount -t proc proc fs/kali-arm64/proc;sudo mount -t sysfs /sys fs/kali-arm64/sys
     - name: setup network
-      run: sudo touch fs/etc/resolv.conf;echo nameserver 8.8.8.8 | sudo tee fs/etc/resolv.conf
+      run: sudo touch fs/kali-arm64/etc/resolv.conf;echo nameserver 8.8.8.8 | sudo tee fs/kali-arm64/etc/resolv.conf
     - name: fix up fs
       run: sudo cp -v payload/stage1.sh fs/kali-arm64/stage1.sh; sudo cp -v payload/stage2.sh fs/kali-arm64/stage2.sh; sudo chroot fs/kali-arm64 bash /stage1.sh; sudo chroot fs/kali-arm64 bash /stage2.sh
     - name: Trigger upgrade and theme installation
