@@ -2,8 +2,8 @@
 echo "starting stage 1"
 
 # kali apt key fix
-wget https://http.kali.org/kali/pool/main/k/kali-archive-keyring/kali-archive-keyring_2018.1_all.deb
-apt install ./kali-archive-keyring_2018.1_all.deb
+wget https://http.kali.org/kali/pool/main/k/kali-archive-keyring/kali-archive-keyring_2020.2_all.deb
+dpkg -i kali-archive-keyring_2020.2_all.deb
 
 apt update
 apt install apt-utils tar -y
