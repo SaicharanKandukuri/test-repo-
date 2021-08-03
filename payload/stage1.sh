@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 echo "starting stage 1"
 
+# kali apt key fix
+apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 7D8D0BF6
 apt update
 apt install apt-utils tar -y
 
