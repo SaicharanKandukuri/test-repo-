@@ -26,7 +26,7 @@ jobs:
     - name: setupvnc
       run: sudo cp -v payload/stage4.sh fs/kali-arm64/stage4.sh;sudo chroot fs/kali-arm64 bash /stage4.sh
     - name: cleanup
-      run: sudo chroot fs apt clean
+      run: sudo chroot fs/kali-arm64 apt clean
     - name: make tarbal
       run: sudo chroot fs/kali-arm64 tar -cvpJf /kali-arm64-rebuild-latest.tar.gz --exclude-caches-all --exclude=/dev/*  --exclude=/sys/* --exclude=/proc/* --exclude=/run/* --exclude=/tmp/* --exclude=/kali-arm64-rebuild-latest.tar.gz /* --one-file-system || true
     - name: upload artifact
