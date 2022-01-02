@@ -15,5 +15,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: hirsute-raw-arm64
-          path: out/hirsute-raw-arm64.tar.gz
+          path: ~/fscook/out/hirsute-raw-arm64.tar.gz
       
