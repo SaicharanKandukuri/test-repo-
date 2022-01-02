@@ -1,8 +1,0 @@
-name: Setup Dependencies
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - run: sudo apt update; sudo apt install debootstrap qemu-user-static binfmt-support -y

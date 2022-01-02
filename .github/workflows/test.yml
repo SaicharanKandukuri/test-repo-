@@ -6,9 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-deps.yml
-      - run: sudo apt update; sudo apt install g++ -y
-      # give exec permissions to the file
-      - run: chmod +x scripts/compile.sh
-      - run: ./scripts/compile.sh
-      - run: ./hello.so
+      - name: Satify Dependencies
+        run: sudo apt update; sudo apt install git build-essential binfmt-support qemu-user-static debootstrap -y
+      - name: Trigger fs-cook
+        run: bash scripts/build-impish.sh
+      - name: Save Builds
+        uses: actions/upload-artifact@v2
+        with:
+          name: impish-image
+          path: ./build/impish-arm64-tarball.tar.gz
+          mime-type: application/gzip
+      
