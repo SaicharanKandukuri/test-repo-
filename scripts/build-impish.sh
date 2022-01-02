@@ -18,6 +18,7 @@ ENABLE_EXIT=true
 ENABLE_USER_SETUP=false
 PREFIX="${frn}-arm64"
 
-do_debootstrap "$PREFIX" arm64
-do_compress    "$PREFIX"
-do_unmount "$PREFIX"
+tree -d -L 5 /home/runner/work
+# do_debootstrap "$PREFIX" arm64
+# do_compress    "$PREFIX"
+# do_unmount "$PREFIX"
