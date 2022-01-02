@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v1.2.0
       - name: Satify Dependencies
         run: sudo apt update; sudo apt install git build-essential binfmt-support qemu-user-static debootstrap -y
       - name: Trigger fs-cook
