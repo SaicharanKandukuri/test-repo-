@@ -1,10 +1,15 @@
 name: Test-WOrkflow
 on: [push]
-
 jobs:
-  compile-cpp:
+  BuildImpishArm64:
     runs-on: ubuntu-latest
     steps:
+      - env:
+          PREFIX: "impish-arm64-tarball"
+          OVERRIDER_COMPRESSION_TYPE: "gzip"
+          ENABLE_EXIT: true
+          ENABLE_USER_SETUP: false
+
       - uses: actions/checkout@v2
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v1.2.0
@@ -16,6 +21,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: impish-image
-          path: ./build/impish-arm64-tarball.tar.gz
+          path: out/impish-arm64-tarball.tar.gz
           mime-type: application/gzip
       
