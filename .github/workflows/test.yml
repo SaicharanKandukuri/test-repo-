@@ -14,7 +14,6 @@ jobs:
       - name: Save Builds
         uses: actions/upload-artifact@v2
         with:
-          name: impish-image
-          path: out/impish-arm64-tarball.tar.gz
-          mime-type: application/gzip
+          name: hirsute-raw-arm64
+          path: out/hirsute-raw-arm64.tar.gz
       
