@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 REPO_URL="https://github.com/RandomCoderOrg/fs-cook"
-WORKDIR="~"
 
-cd "$WORKDIR" || exit 1
 git clone $REPO_URL
 cd "$(basename $REPO_URL)" || exit 1 
 
