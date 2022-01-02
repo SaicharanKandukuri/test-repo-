@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-g++ -o hello.so hello-world.cpp
+g++ -o hello.so ./scritps/hello-world.cpp
