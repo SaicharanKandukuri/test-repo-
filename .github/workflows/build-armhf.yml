@@ -7,4 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt update; sudo apt install tree -y
-      - run: tree -L 4 /home
+      - run: tree -L 6 /home
