@@ -1,0 +1,11 @@
+name: Test-WOrkflow
+on: [push]
+
+jobs:
+  compile-cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: apt update; apt install g++ -y
+      - run: cd scripts; ./compile.sh
+      - run: ./hello.so
