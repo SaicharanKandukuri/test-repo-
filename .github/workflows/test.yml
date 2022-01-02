@@ -8,6 +8,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: sudo apt update; sudo apt install g++ -y
       # give exec permissions to the file
-      - run: chmod +x compile.sh
-      - run: cd scripts; ./compile.sh
+      - run: chmod +x scripts/compile.sh
+      - run: ./scripts/compile.sh
       - run: ./hello.so
