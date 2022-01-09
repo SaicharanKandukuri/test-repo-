@@ -6,7 +6,6 @@ git clone $REPO_URL
 cd "$(basename $REPO_URL)" || exit 1 
 
 source plugins/envsetup
-source plugins/colors
 
 export OVERRIDER_COMPRESSION_TYPE
 export ENABLE_EXIT
@@ -26,9 +25,9 @@ additional_setup() {
     run_cmd echo deb-src $MIRROR $SUITE-updates multiverser \> /etc/apt/sources.list
 }
 
-do_debootstrap "$PREFIX-arm64" arm64
-do_debootstrap "$PREFIX-armhf" armhf
-do_debootstrap "$PREFIX-amd64" amd64
+do_build "$PREFIX-arm64" arm64
+do_build "$PREFIX-armhf" armhf
+do_build "$PREFIX-amd64" amd64
 
 do_compress    "$PREFIX-arm64"
 do_compress    "$PREFIX-armhf"
