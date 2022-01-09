@@ -1,7 +1,7 @@
 name: Test-WOrkflow
 on: [push]
 jobs:
-  BuildImpishArm64:
+  BuildImpish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,6 +14,7 @@ jobs:
       - name: Save Builds
         uses: actions/upload-artifact@v2
         with:
-          name: hirsute-raw-arm64
-          path: /home/runner/work/test-repo-/test-repo-/fs-cook/out/hirsute-raw-arm64.tar.gz
+          name: impish-raw-artifacts
+          path: /home/runner/work/test-repo-/test-repo-/fs-cook/out/impish-raw-*.tar.gz
+          
       
