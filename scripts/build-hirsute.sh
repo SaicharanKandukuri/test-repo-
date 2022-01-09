@@ -11,7 +11,7 @@ export OVERRIDER_COMPRESSION_TYPE
 export ENABLE_EXIT
 export ENABLE_USER_SETUP
 
-SUITE="impish"
+SUITE="hirsute"
 frn="out/impish-raw"
 OVERRIDER_COMPRESSION_TYPE="gzip"
 ENABLE_EXIT=true
