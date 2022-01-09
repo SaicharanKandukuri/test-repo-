@@ -39,17 +39,17 @@ jobs:
       - name: save arm64 builds
         uses: actions/upload-artifact@v2
         with:
-          name: impish-raw-arm64
+          name: hirsute-raw-arm64
           path: /home/runner/work/test-repo-/test-repo-/fs-cook/hirsute-arm64
       - name: save armhf builds
         uses: actions/upload-artifact@v2
         with:
-          name: impish-raw-armhf
+          name: hirsute-raw-armhf
           path: /home/runner/work/test-repo-/test-repo-/fs-cook/hirsute-armhf
       - name: save amd64 builds
         uses: actions/upload-artifact@v2
         with:
-          name: impish-raw-amd64
+          name: hirsute-raw-amd64
           path: /home/runner/work/test-repo-/test-repo-/fs-cook/hirsute-amd64
       
       
