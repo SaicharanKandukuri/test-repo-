@@ -1,10 +1,110 @@
-name: Get tree
-on: [push]
+name: build udroid xfce4
+on:
+  schedule: [{cron: "0 0 * * SUN"}]
+  workflow_dispatch:
+  push: {branches: ["master", "main"]}
 
 jobs:
-  GetTree:
+  BuildUDROIDAMD64:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: sudo apt update; sudo apt install tree -y
-      - run: tree -L 6 /home
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Udroid XFCE4 [AMD64]
+      run: |
+       echo "GG" >> some.txt
+       tar -xvpzf impish-xfce4-build-amd64.tar.gz
+    - uses: actions/upload-artifact@v3
+      with:
+        name: udroid-impish-xfce4-amd64
+        path: impish-xfce4-build-amd64.tar.gz
+
+  BuildUDROIDARM64:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Udroid XFCE4 [AMD64]
+      run: |
+       echo "GG" >> some.txt
+       tar -xvpzf impish-xfce4-build-arm64.tar.gz
+    - uses: actions/upload-artifact@v3
+      with:
+        name: udroid-impish-xfce4-arm64
+        path: impish-xfce4-build-arm64.tar.gz
+
+  BuildUDROIDARMHF:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Udroid XFCE4 [AMD64]
+      run: |
+       echo "GG" >> some.txt
+       tar -xvpzf impish-xfce4-build-armhf.tar.gz some.txt
+    - uses: actions/upload-artifact@v3
+      with:
+        name: udroid-impish-xfce4-armhf
+        path: impish-xfce4-build-armhf.tar.gz
+
+  CreateRelease:
+    needs: [BuildUDROIDAMD64, BuildUDROIDARM64, BuildUDROIDARMHF]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Compute Realease Tag
+      run: |
+        version=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/SaicharanKandukuri/test-repo- | tail -n1 | tr " " "*" | tr "\t" " " | cut -d " " -f 2 | cut -d "/" -f 3)
+        BUILDNUMBER=${version[*]: -2}
+        udroid_version=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/RandomCoderOrg/ubuntu-on-android | tail -n1 | tr " " "*" | tr "\t" " " | cut -d " " -f 2 | cut -d "/" -f 3)
+        FinalVersion="UDROIDFS${udroid_version^^}B0$((BUILDNUMBER+1))"
+        echo $FinalVersion
+        export $FinalVersion
+
+    - name: Pull Artifacts
+      uses: actions/download-artifact@v3
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.FinalVersion }}
+        release_name: Release ${{ env.FinalVersion }}
+        draft: false
+        prerelease: false
+
+    - name: upload linux artifact arm64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: impish-xfce4-build-arm64.tar.gz
+        asset_name: impish-xfce4-build-arm64.tar.gz
+        asset_content_type: application/gzip
+    - name: upload linux artifact armhf
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: impish-xfce4-build-armhf.tar.gz
+        asset_name: impish-xfce4-build-armhf.tar.gz
+        asset_content_type: application/gzip
+    - name: upload linux artifact amd64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: impish-xfce4-build-amd64.tar.gz
+        asset_name: impish-xfce4-build-amd64.tar.gz
+        asset_content_type: application/gzip
+
+
+    
