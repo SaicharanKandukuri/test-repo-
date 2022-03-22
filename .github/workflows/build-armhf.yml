@@ -60,9 +60,8 @@ jobs:
         version=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/SaicharanKandukuri/test-repo- | tail -n1 | tr " " "*" | tr "\t" " " | cut -d " " -f 2 | cut -d "/" -f 3)
         BUILDNUMBER=${version[*]: -2}
         udroid_version=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/RandomCoderOrg/ubuntu-on-android | tail -n1 | tr " " "*" | tr "\t" " " | cut -d " " -f 2 | cut -d "/" -f 3)
-        FinalVersion="UDROIDFS${udroid_version^^}B0$((BUILDNUMBER+1))"
+        echo "FinalVersion=\"UDROIDFS${udroid_version^^}B0$((BUILDNUMBER+1))\"" >> $GITHUB_ENV
         echo $FinalVersion
-        export $FinalVersion
 
     - name: Pull Artifacts
       uses: actions/download-artifact@v3
