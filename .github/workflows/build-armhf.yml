@@ -65,7 +65,19 @@ jobs:
 
     - name: Pull Artifacts
       uses: actions/download-artifact@v3
-
+      with:
+        name: udroid-impish-xfce4-armhf
+        path: impish-xfce4-build-armhf.tar.gz
+      
+    - uses: actions/download-artifact@v3
+      with:
+        name: udroid-impish-xfce4-arm64
+        path: impish-xfce4-build-arm64.tar.gz
+    - uses: actions/download-artifact@v3
+      with:
+        name: udroid-impish-xfce4-amd64
+        path: impish-xfce4-build-amd64.tar.gz
+    
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
